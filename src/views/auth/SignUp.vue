@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <v-card>
+      <v-card :isLoading="isLoading">
         <v-row>
           <v-col cols="8">
             <div class="p-5">
@@ -9,50 +9,57 @@
                 <h5>Logo</h5>
                 <h4>Tạo Tài Khoản</h4>
               </div>
-              <v-form v-model="formAdmin.valid" :ref="formAdmin">
+              <v-form class="mt-5" v-model="formAdmin.valid" ref="formAdmin">
                 <v-row>
                   <v-col cols="12" sm="6">
                     <v-text-field
                       v-model="formAdmin.value.fullName"
+                      :rules="formAdmin.validate.fullName"
                       color="purple darken-2"
                       label="Họ và tên"
                       placeholder="Vui lòng nhập họ và tên"
-                      required
+                      dense
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
                     <v-text-field
                       v-model="formAdmin.value.phone"
+                      :rules="formAdmin.validate.phone"
                       color="blue darken-2"
                       label="Số điện thoại"
                       placeholder="Vui lòng nhập số điện thoại"
-                      required
+                      dense
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12">
                     <v-text-field
                       v-model="formAdmin.value.email"
+                      :rules="formAdmin.validate.email"
                       color="purple darken-2"
                       label="Vui lòng nhập email"
-                      required
+                      dense
                     ></v-text-field>
                   </v-col>
                   <span>Bạn có thể nhập chữ cái, sô và dấu chấm</span>
                   <v-col cols="12" sm="6">
                     <v-text-field
                       v-model="formAdmin.value.password"
+                      :rules="formAdmin.validate.password"
                       color="purple darken-2"
                       label="Vui lòng nhập password"
-                      required
+                      dense
+                      type="password"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
                     <v-text-field
                       v-model="formAdmin.value.confirmPassword"
+                      :rules="formAdmin.validate.confirmPassword"
                       color="blue darken-2"
                       label="Xác nhận mật khẩu"
                       placeholder="Xác nhận lại mật khẩu"
-                      required
+                      dense
+                      type="password"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -82,11 +89,22 @@
           </v-col>
         </v-row>
       </v-card>
+      <v-snackbar top v-model="snackbar" :timeout="timeout">
+        {{ text }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-container>
   </div>
 </template>
 
 <script>
+import RegexModule from '../../modules/Regex.module'
+import Auth from '../../apis/auth.api'
 export default {
   name: 'SignUp',
   props: ['website', 'user'],
