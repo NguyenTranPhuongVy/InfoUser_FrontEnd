@@ -67,8 +67,14 @@
                   >Sử dụng 8 ký tự trở lên và kết hợp chữ cái, chữ số và biểu
                   tượng</span
                 >
+                <v-checkbox
+                  v-model="ex4"
+                  label="Hiển thị mật khẩu"
+                  color="indigo"
+                  value="Hiển thị mật khẩu"
+                ></v-checkbox>
               </v-form>
-              <v-row>
+              <v-row class="mt-3">
                 <v-col cols="6">
                   <v-btn text>Đăng nhập</v-btn>
                 </v-col>
@@ -82,9 +88,12 @@
               </v-row>
             </div>
           </v-col>
-          <v-col cols="4" class="mt-5">
+          <v-col cols="4">
             <img
               src="https://ssl.gstatic.com/accounts/signup/glif/account.svg"
+              width="244px"
+              height="244px"
+              class="size-img"
             />
           </v-col>
         </v-row>
@@ -196,4 +205,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.container {
+  max-width: 900px;
+}
+.size-img {
+  margin-top: 30%;
+  max-width: 100%;
+}
+</style>

@@ -7,7 +7,9 @@
         <v-spacer> </v-spacer>
         <v-responsive max-width="400">
           <div class="float-end">
-            <v-btn :color="website.color.subMain" text>Đăng nhập</v-btn>
+            <v-btn :color="website.color.subMain" :to="{ name: 'SignIn' }" text
+              >Đăng nhập</v-btn
+            >
             <v-btn
               :color="website.color.subMain"
               :to="{ name: 'SignUp' }"

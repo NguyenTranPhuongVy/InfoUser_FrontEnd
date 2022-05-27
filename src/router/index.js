@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 
 //* auth
 import SignUp from '../views/auth/SignUp.vue'
+import SignIn from '../views/auth/SignIn.vue'
 
 //* 404
 import ERR404 from '../views/ERR404.vue'
@@ -20,6 +21,11 @@ const routes = [{
         path: '/dang_ky',
         name: 'SignUp',
         component: SignUp
+    },
+    {
+        path: '/dang_nhap',
+        name: 'SignIn',
+        component: SignIn
     },
     //* 404
     {
