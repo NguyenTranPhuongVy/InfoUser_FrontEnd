@@ -15,4 +15,30 @@ export default class Auth {
         }
     }
 
+    static async secret() {
+        try {
+            const res = await axios.get(`${url}/secret`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
+    static async signIn(body, key) {
+        try {
+            const res = await axios.patch(`${url}/signIn`, body, {
+                params: {
+                    key,
+                }
+            });
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
 }
